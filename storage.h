@@ -3,21 +3,15 @@
 
 struct Parcel {
     int trackingID;
-    char senderName[50];
-    char senderAddress[100];
-    char receiverName[50];
-    char receiverAddress[100];
-    char contact[15];
-    char status[20];
+    char sender[50];
+    char receiver[50];
+    char date[20];
     char location[50];
-    char date[15];
 };
 
-
+// Function declarations
 void storeParcel(struct Parcel p);
-
 int getParcelByID(int id, struct Parcel *result);
-
 int getParcelsByLocationAndDate(char loc[], char date[], struct Parcel results[], int maxResults);
 
 #endif
