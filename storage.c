@@ -34,12 +34,15 @@ void write_csv_header(FILE *f) {
 // Write one parcel row
 void write_csv_row(FILE *f, const Parcel *p, const char *date, const char *time_str) {
     char special[200];
-    if (strlen(p->special_instructions) <= 1) {
+
+    // Trim newline from user input if present
+    strcpy(special, p->special_instructions);
+    size_t len = strlen(special);
+    if (len > 0 && special[len-1] == '\n') special[len-1] = '\0';
+
+    // If empty after trimming, set to "None"
+    if (strlen(special) == 0) {
         strcpy(special, "None");
-    } else {
-        strcpy(special, p->special_instructions);
-        size_t len = strlen(special);
-        if (special[len-1] == '\n') special[len-1] = '\0';
     }
 
     fprintf(f,

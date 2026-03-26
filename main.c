@@ -15,34 +15,40 @@ int main() {
     printf("    PARCEL BOOKING SYSTEM     \n");
     printf("==============================\n");
 
+    // Get sender and receiver info
     input_person(&sender, "Sender");
     input_person(&receiver, "Receiver");
-    input_parcel_info(&parcel);
+    input_parcel_info(&parcel);   // includes weight, type, and optional special instructions
 
+    // Generate tracking number
     generate_tracking_number(tracking_number);
-
     strncpy(p.tracking_number, tracking_number, sizeof(p.tracking_number)-1);
+
+    // Fill sender details
     strncpy(p.sender_name, sender.name, sizeof(p.sender_name)-1);
     strncpy(p.sender_contact, sender.phone, sizeof(p.sender_contact)-1);
     strncpy(p.sender_address, sender.address, sizeof(p.sender_address)-1);
 
+    // Fill receiver details
     strncpy(p.receiver_name, receiver.name, sizeof(p.receiver_name)-1);
     strncpy(p.receiver_contact, receiver.phone, sizeof(p.receiver_contact)-1);
     strncpy(p.receiver_address, receiver.address, sizeof(p.receiver_address)-1);
 
+    // Parcel details
     p.weight = parcel.weight;
     strncpy(p.parcel_type, parcel.type, sizeof(p.parcel_type)-1);
 
-    printf("Enter special instructions (leave empty for None): ");
-    fgets(p.special_instructions, sizeof(p.special_instructions), stdin);
-    size_t len = strlen(p.special_instructions);
-    if (len > 0 && p.special_instructions[len-1] == '\n') 
-        p.special_instructions[len-1] = '\0';
-    if (strlen(p.special_instructions) == 0) 
-        strcpy(p.special_instructions, "None");
+    // Special instructions: use user input if provided, else "None"
+    if (strlen(parcel.special_instructions) > 1) {
+        strncpy(p.special_instructions, parcel.special_instructions, sizeof(p.special_instructions)-1);
+    } else {
+        strncpy(p.special_instructions, "None", sizeof(p.special_instructions)-1);
+    }
 
+    // Save to CSV
     save_to_csv(&p);
 
+    // Print confirmation
     printf("\n==============================\n");
     printf("       BOOKING CONFIRMED      \n");
     printf("==============================\n");
