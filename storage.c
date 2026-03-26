@@ -2,7 +2,7 @@
 #include <string.h>
 #include "storage.h"
 
-#define FILE_NAME "parcels.txt"
+#define FILE_NAME "parcels.csv"
 
 // Check if file exists
 int file_exists(const char *filename) {
@@ -24,8 +24,12 @@ void write_csv_header(FILE *f) {
 void write_csv_row(FILE *f, const Parcel *p) {
     fprintf(f, "%s,%s,%s,\"%s\",%s,%s,\"%s\",%.2f,%s,\"%s\",%s\n",
         p->tracking_number,
-        p->sender_name, p->sender_contact, p->sender_address,
-        p->receiver_name, p->receiver_contact, p->receiver_address,
+        p->sender_name,
+        p->sender_contact,
+        p->sender_address,
+        p->receiver_name,
+        p->receiver_contact,
+        p->receiver_address,
         p->weight,
         p->parcel_type,
         p->special_instructions,

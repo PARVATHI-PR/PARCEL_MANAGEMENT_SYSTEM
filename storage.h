@@ -1,7 +1,7 @@
 #ifndef STORAGE_H
 #define STORAGE_H
 
-#include <stdio.h>   // for FILE type (good practice)
+#include <stdio.h>
 
 // Define Parcel structure
 typedef struct {
@@ -23,6 +23,13 @@ typedef struct {
 } Parcel;
 
 // Function declarations
+
+// Save parcel to CSV
 void save_to_csv(const Parcel *p);
+
+// (Optional but recommended for future features)
+int file_exists(const char *filename);
+void write_csv_header(FILE *f);
+void write_csv_row(FILE *f, const Parcel *p);
 
 #endif // STORAGE_H
