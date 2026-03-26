@@ -24,12 +24,13 @@ typedef struct {
 
 // Function declarations
 
-// Save parcel to CSV
-void save_to_csv(const Parcel *p);
+// Save parcel (auto adds date-time)
+void save_to_csv(Parcel *p);
 
-// (Optional but recommended for future features)
+// Helper functions
 int file_exists(const char *filename);
 void write_csv_header(FILE *f);
 void write_csv_row(FILE *f, const Parcel *p);
+void get_current_datetime(char *buffer);
 
 #endif // STORAGE_H

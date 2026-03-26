@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "storage.h"
 
 #define FILE_NAME "parcels.csv"
@@ -10,6 +11,17 @@ int file_exists(const char *filename) {
     if (f == NULL) return 0;
     fclose(f);
     return 1;
+}
+
+// Get current date and time
+void get_current_datetime(char *buffer) {
+    time_t t;
+    struct tm *tm_info;
+
+    time(&t);
+    tm_info = localtime(&t);
+
+    strftime(buffer, 50, "%Y-%m-%d %H:%M:%S", tm_info);
 }
 
 // Write CSV header (only once)
@@ -38,8 +50,11 @@ void write_csv_row(FILE *f, const Parcel *p) {
 }
 
 // Save parcel to CSV file
-void save_to_csv(const Parcel *p) {
+void save_to_csv(Parcel *p) {
     int exists = file_exists(FILE_NAME);
+
+    // Auto-fill current date & time
+    get_current_datetime(p->created_at);
 
     FILE *f = fopen(FILE_NAME, "a");
     if (f == NULL) {
