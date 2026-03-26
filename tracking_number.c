@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include "tracking.h"
 int read_counter(char *last_date) {
     FILE *f = fopen(COUNTER_FILE, "r");
     if (!f) { strcpy(last_date, ""); return 0; }
