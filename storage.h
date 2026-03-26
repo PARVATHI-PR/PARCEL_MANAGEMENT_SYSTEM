@@ -1,7 +1,7 @@
 #ifndef STORAGE_H
 #define STORAGE_H
 
-#include <stdio.h>
+#include <stdio.h>   // for FILE
 
 // Define Parcel structure
 typedef struct {
@@ -17,20 +17,14 @@ typedef struct {
 
     float weight;
     char parcel_type[50];
-    char special_instructions[200];
+    char special_instructions[200]; // still here, but always "None"
     char created_at[50];
 
 } Parcel;
 
 // Function declarations
-
-// Save parcel (auto adds date-time)
 void save_to_csv(Parcel *p);
-
-// Helper functions
-int file_exists(const char *filename);
-void write_csv_header(FILE *f);
-void write_csv_row(FILE *f, const Parcel *p);
-void get_current_datetime(char *buffer);
+void get_current_datetime(char *date, char *time_str); // updated
+void write_csv_row(FILE *f, const Parcel *p, const char *date, const char *time_str); // updated
 
 #endif // STORAGE_H
