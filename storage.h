@@ -1,7 +1,7 @@
 #ifndef STORAGE_H
 #define STORAGE_H
 
-#include <stdio.h>   // for FILE type
+#include <stdio.h>
 
 // Define Parcel structure
 typedef struct {
@@ -17,9 +17,7 @@ typedef struct {
 
     float weight;
     char parcel_type[50];
-    char special_instructions[200]; // always "None"
-    char created_at[50];            // optional, for timestamp
-
+    char special_instructions[200]; // can be entered by user
 } Parcel;
 
 // Function declarations

@@ -17,15 +17,13 @@ int file_exists(const char *filename) {
 void get_current_datetime(char *date, char *time_str) {
     time_t t;
     struct tm *tm_info;
-
     time(&t);
     tm_info = localtime(&t);
-
-    strftime(date, 20, "%Y-%m-%d", tm_info);     // Date column
-    strftime(time_str, 20, "%H:%M:%S", tm_info); // Time column
+    strftime(date, 20, "%Y-%m-%d", tm_info);
+    strftime(time_str, 20, "%H:%M:%S", tm_info);
 }
 
-// Write CSV header (only once)
+// Write CSV header
 void write_csv_header(FILE *f) {
     fprintf(f,
         "tracking_number,sender_name,sender_contact,sender_address,"
@@ -35,8 +33,14 @@ void write_csv_header(FILE *f) {
 
 // Write one parcel row
 void write_csv_row(FILE *f, const Parcel *p, const char *date, const char *time_str) {
-    // Always set special instructions to "None"
-    char special[] = "None";
+    char special[200];
+    if (strlen(p->special_instructions) <= 1) {
+        strcpy(special, "None");
+    } else {
+        strcpy(special, p->special_instructions);
+        size_t len = strlen(special);
+        if (special[len-1] == '\n') special[len-1] = '\0';
+    }
 
     fprintf(f,
         "\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%.2f,\"%s\",\"%s\",\"%s\",\"%s\"\n",
@@ -58,26 +62,17 @@ void write_csv_row(FILE *f, const Parcel *p, const char *date, const char *time_
 // Save parcel to CSV
 void save_to_csv(Parcel *p) {
     int exists = file_exists(FILE_NAME);
-
-    char date[20];
-    char time_str[20];
-
-    // Get current date & time
+    char date[20], time_str[20];
     get_current_datetime(date, time_str);
 
     FILE *f = fopen(FILE_NAME, "a");
-    if (f == NULL) {
+    if (!f) {
         perror("[ERROR] Could not open file");
         return;
     }
 
-    // Write header only if file is new
-    if (!exists) {
-        write_csv_header(f);
-    }
+    if (!exists) write_csv_header(f);
 
-    // Write row
     write_csv_row(f, p, date, time_str);
-
     fclose(f);
 }
