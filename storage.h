@@ -1,6 +1,8 @@
 #ifndef STORAGE_H
 #define STORAGE_H
 
+#include <stdio.h>   // for FILE type (good practice)
+
 // Define Parcel structure
 typedef struct {
     char tracking_number[50];
@@ -23,4 +25,4 @@ typedef struct {
 // Function declarations
 void save_to_csv(const Parcel *p);
 
-#endif
+#endif // STORAGE_H

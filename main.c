@@ -9,7 +9,7 @@ int main() {
     Person sender, receiver;
     ParcelInfo parcel;
     char tracking_number[30];
-    struct Parcel p;
+    Parcel p;   // ✅ Correct
 
     printf("\n==============================\n");
     printf("    PARCEL BOOKING SYSTEM     \n");
@@ -21,17 +21,25 @@ int main() {
 
     generate_tracking_number(tracking_number);
 
-    p.trackingID = atoi(tracking_number + 4);
-    strncpy(p.senderName,     sender.name,      sizeof(p.senderName)     - 1);
-    strncpy(p.senderAddress,  sender.address,   sizeof(p.senderAddress)  - 1);
-    strncpy(p.receiverName,   receiver.name,    sizeof(p.receiverName)   - 1);
-    strncpy(p.receiverAddress,receiver.address, sizeof(p.receiverAddress)- 1);
-    strncpy(p.contact,        sender.phone,     sizeof(p.contact)        - 1);
-    strncpy(p.status,         "Booked",         sizeof(p.status)         - 1);
-    strncpy(p.location,       "Origin",         sizeof(p.location)       - 1);
-    strncpy(p.date,           tracking_number + 4, sizeof(p.date)        - 1);
+    // ✅ Fill struct correctly
+    strncpy(p.tracking_number, tracking_number, sizeof(p.tracking_number) - 1);
 
-    storeParcel(p);
+    strncpy(p.sender_name, sender.name, sizeof(p.sender_name) - 1);
+    strncpy(p.sender_contact, sender.phone, sizeof(p.sender_contact) - 1);
+    strncpy(p.sender_address, sender.address, sizeof(p.sender_address) - 1);
+
+    strncpy(p.receiver_name, receiver.name, sizeof(p.receiver_name) - 1);
+    strncpy(p.receiver_contact, receiver.phone, sizeof(p.receiver_contact) - 1);
+    strncpy(p.receiver_address, receiver.address, sizeof(p.receiver_address) - 1);
+
+    p.weight = parcel.weight;
+    strncpy(p.parcel_type, parcel.type, sizeof(p.parcel_type) - 1);
+
+    strncpy(p.special_instructions, "None", sizeof(p.special_instructions) - 1);
+    strncpy(p.created_at, tracking_number, sizeof(p.created_at) - 1);
+
+    // ✅ Correct function
+    save_to_csv(&p);
 
     printf("\n==============================\n");
     printf("       BOOKING CONFIRMED      \n");
