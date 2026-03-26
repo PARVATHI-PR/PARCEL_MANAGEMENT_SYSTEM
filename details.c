@@ -15,7 +15,7 @@ int is_valid_phone(const char *s) {
             return 0;
         len++;
     }
-    return (len >= 7 && len <= 15);
+    return (len ==10 );
 }
 
 void trim_newline(char *s) {
@@ -45,7 +45,7 @@ void input_person(Person *p, const char *role) {
         printf("Phone   : ");
         scanf(" %[^\n]", p->phone);
         if (!is_valid_phone(p->phone))
-            printf("  -> Phone must be 7–15 digits only. Please re-enter.\n");
+            printf("  -> Phone must be 10 digits only. Please re-enter.\n");
     } while (!is_valid_phone(p->phone));
 }
 
