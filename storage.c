@@ -3,119 +3,34 @@
 #define FILE_NAME "parcels.txt"
 #include "storage.h"
 
-
-struct Parcel
- {
-    int trackingID;
-    char senderName[50];
-    char senderAddress[100];
-    char receiverName[50];
-    char receiverAddress[100];
-    char contact[15];
-    char status[20];
-    char location[50];
-    char date[15];
-};
-
-
-void storeParcel(struct Parcel p) 
-{
-    FILE *fp = fopen(FILE_NAME, "a");
-
-    if (fp == NULL)
-     {
-        printf("Error opening file!\n");
-        return;
-    }
-
-    int written = fprintf(fp, "%d,%s,%s,%s,%s,%s,%s,%s,%s\n",
-        p.trackingID,
-        p.senderName,
-        p.senderAddress,
-        p.receiverName,
-        p.receiverAddress,
-        p.contact,
-        p.status,
-        p.location,
-        p.date
-    );
-
-    if (written < 0) 
-    {
-        printf("Error writing data!\n");
-    }
-
-    fclose(fp);
+int file_exists(const char *filename) {
+    FILE *f = fopen(filename, "r");
+    if (!f) return 0;
+    fclose(f);
+    return 1;
 }
-
-
-int getParcelByID(int id, struct Parcel *result)
- {
-    FILE *fp = fopen(FILE_NAME, "r");
-
-    if (fp == NULL)
-     {
-        return 0;
-    }
-
-    struct Parcel p;
-
-    while (fscanf(fp, "%d,%49[^,],%99[^,],%49[^,],%99[^,],%14[^,],%19[^,],%49[^,],%14[^\n]\n",
-        &p.trackingID,
-        p.senderName,
-        p.senderAddress,
-        p.receiverName,
-        p.receiverAddress,
-        p.contact,
-        p.status,
-        p.location,
-        p.date) != EOF) 
-        {
-
-        if (p.trackingID == id) 
-        {
-            *result = p; 
-            fclose(fp);
-            return 1;
-        }
-    }
-
-    fclose(fp);
-    return 0;
+ 
+void write_csv_header(FILE *f) {
+    fprintf(f,
+        "tracking_number,sender_name,sender_contact,sender_address,"
+        "receiver_name,receiver_contact,receiver_address,"
+        "weight_kg,parcel_type,special_instructions,created_at\n");
 }
-
-
-int getParcelsByLocationAndDate(char loc[], char date[], struct Parcel results[], int maxResults) 
-{
-    FILE *fp = fopen(FILE_NAME, "r");
-
-    if (fp == NULL)
-     {
-        return 0;
-    }
-
-    struct Parcel p;
-    int count = 0;
-
-    while (fscanf(fp, "%d,%49[^,],%99[^,],%49[^,],%99[^,],%14[^,],%19[^,],%49[^,],%14[^\n]\n",
-        &p.trackingID,
-        p.senderName,
-        p.senderAddress,
-        p.receiverName,
-        p.receiverAddress,
-        p.contact,
-        p.status,
-        p.location,
-        p.date) != EOF) 
-        {
-        if (strcmp(p.location, loc) == 0 && strcmp(p.date, date) == 0)
-         {
-            if (count < maxResults) 
-            {
-                results[count++] = p;
-            }
-        }
-    }
-    fclose(fp);
-    return count;
+ 
+void write_csv_row(FILE *f, const Parcel *p) {
+    fprintf(f, "%s,%s,%s,\"%s\",%s,%s,\"%s\",%.2f,%s,\"%s\",%s\n",
+        p->tracking_number,
+        p->sender_name,    p->sender_contact, p->sender_address,
+        p->receiver_name,  p->receiver_contact, p->receiver_address,
+        p->weight,         p->parcel_type,
+        p->special_instructions, p->created_at);
+}
+ 
+void save_to_csv(const Parcel *p) {
+    int exists = file_exists(FILE_NAME);
+    FILE *f = fopen(FILE_NAME, "a");
+    if (!f) { printf("  [ERROR] Could not open %s\n", FILE_NAME); return; }
+    if (!exists) write_csv_header(f);
+    write_csv_row(f, p);
+    fclose(f);
 }

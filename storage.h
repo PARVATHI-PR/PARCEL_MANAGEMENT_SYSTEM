@@ -1,17 +1,26 @@
 #ifndef STORAGE_H
 #define STORAGE_H
 
-struct Parcel {
-    int trackingID;
-    char sender[50];
-    char receiver[50];
-    char date[20];
-    char location[50];
-};
+// Define Parcel structure
+typedef struct {
+    char tracking_number[50];
+
+    char sender_name[100];
+    char sender_contact[20];
+    char sender_address[200];
+
+    char receiver_name[100];
+    char receiver_contact[20];
+    char receiver_address[200];
+
+    float weight;
+    char parcel_type[50];
+    char special_instructions[200];
+    char created_at[50];
+
+} Parcel;
 
 // Function declarations
-void storeParcel(struct Parcel p);
-int getParcelByID(int id, struct Parcel *result);
-int getParcelsByLocationAndDate(char loc[], char date[], struct Parcel results[], int maxResults);
+void save_to_csv(const Parcel *p);
 
 #endif
