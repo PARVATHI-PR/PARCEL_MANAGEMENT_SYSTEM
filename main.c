@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "details.h"    // DO NOT CHANGE
-#include "tracking.h"   // DO NOT CHANGE
+#include "details.h"
+#include "tracking.h"
 #include "storage.h"
 
 int main() {
@@ -18,7 +18,7 @@ int main() {
     // Get sender and receiver info
     input_person(&sender, "Sender");
     input_person(&receiver, "Receiver");
-    input_parcel_info(&parcel);   // includes weight, type, and optional special instructions
+    input_parcel_info(&parcel);   // includes weight, type, and optional specialInstructions
 
     // Generate tracking number
     generate_tracking_number(tracking_number);
@@ -38,9 +38,9 @@ int main() {
     p.weight = parcel.weight;
     strncpy(p.parcel_type, parcel.type, sizeof(p.parcel_type)-1);
 
-    // Special instructions: use user input if provided, else "None"
-    if (strlen(parcel.special_instructions) > 1) {
-        strncpy(p.special_instructions, parcel.special_instructions, sizeof(p.special_instructions)-1);
+    // Special instructions
+    if (strlen(parcel.specialInstructions) > 1) {
+        strncpy(p.special_instructions, parcel.specialInstructions, sizeof(p.special_instructions)-1);
     } else {
         strncpy(p.special_instructions, "None", sizeof(p.special_instructions)-1);
     }
