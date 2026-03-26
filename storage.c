@@ -24,7 +24,7 @@ void get_current_datetime(char *buffer) {
     strftime(buffer, 50, "%Y-%m-%d %H:%M:%S", tm_info);
 }
 
-// Write CSV header (only once)
+// Write CSV header
 void write_csv_header(FILE *f) {
     fprintf(f,
         "tracking_number,sender_name,sender_contact,sender_address,"
@@ -34,7 +34,12 @@ void write_csv_header(FILE *f) {
 
 // Write one parcel row
 void write_csv_row(FILE *f, const Parcel *p) {
-    fprintf(f, "%s,%s,%s,\"%s\",%s,%s,\"%s\",%.2f,%s,\"%s\",%s\n",
+
+    // Always set special instructions to "None"
+    char special[] = "None";
+
+    fprintf(f,
+        "\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%.2f,\"%s\",\"%s\",\"%s\"\n",
         p->tracking_number,
         p->sender_name,
         p->sender_contact,
@@ -44,16 +49,17 @@ void write_csv_row(FILE *f, const Parcel *p) {
         p->receiver_address,
         p->weight,
         p->parcel_type,
-        p->special_instructions,
+        special,
         p->created_at
     );
 }
 
-// Save parcel to CSV file
+// Save parcel to CSV
 void save_to_csv(Parcel *p) {
+
     int exists = file_exists(FILE_NAME);
 
-    // Auto-fill current date & time
+    // Auto date-time
     get_current_datetime(p->created_at);
 
     FILE *f = fopen(FILE_NAME, "a");
@@ -62,12 +68,12 @@ void save_to_csv(Parcel *p) {
         return;
     }
 
-    // Write header only if file is new
+    // Write header only once
     if (!exists) {
         write_csv_header(f);
     }
 
-    // Write data row
+    // Write row
     write_csv_row(f, p);
 
     fclose(f);
