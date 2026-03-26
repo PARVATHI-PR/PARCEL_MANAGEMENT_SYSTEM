@@ -49,7 +49,7 @@ int main() {
     printf("  Receiver    : %s\n", receiver.name);
     printf("  Weight      : %.2f kg\n", parcel.weight);
     printf("  Type        : %s\n", parcel.type);
-    printf("  Saved to    : parcels.txt\n");
+    printf("  Saved to    : parcels.csv\n");
     printf("==============================\n\n");
 
     return 0;
