@@ -47,6 +47,8 @@ int main() {
 
     // Save to CSV
     save_to_csv(&p);
+    char date[20],time_str[20];
+    get_current_datetime(date,time_str);
 
     // Print confirmation
     printf("\n==============================\n");
@@ -58,6 +60,7 @@ int main() {
     printf("  Weight           : %.2f kg\n", parcel.weight);
     printf("  Parcel Type      : %s\n", parcel.type);
     printf("  Special Instr.   : %s\n", p.special_instructions);
+    printf("  Date & Time      : %s %s\n", date, time_str);
     printf("  Saved to         : parcels.csv\n");
     printf("==============================\n\n");
 

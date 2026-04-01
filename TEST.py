@@ -1,0 +1,64 @@
+from flask import Flask, render_template, request
+import subprocess
+
+app = Flask(__name__)
+
+# Home page → form
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
+# When form is submitted
+@app.route('/book', methods=['POST'])
+def book():
+
+    # 📥 Get form data
+    sender_name = request.form['senderName']
+    sender_phone = request.form['senderPhone']
+    sender_address = request.form['senderAddress']
+
+    receiver_name = request.form['receiverName']
+    receiver_phone = request.form['receiverPhone']
+    receiver_address = request.form['receiverAddress']
+
+    weight = request.form['weight']
+    parcel_type = request.form['parcelType']
+    spl_instruction = request.form['specialInstructions']
+
+    # 🔥 Run C program
+    result = subprocess.run(
+        ["program.exe"],   # your C exe
+        input=f"{sender_name}\n{sender_address}\n{sender_phone}\n"
+              f"{receiver_name}\n{receiver_address}\n{receiver_phone}\n"
+              f"{weight}\n{parcel_type}\n{spl_instruction}\n",
+        text=True,
+        capture_output=True
+    )
+
+    output = result.stdout
+
+    # 🧠 Extract tracking number from output
+    tracking = "Not Found"
+    for line in output.split("\n"):
+        if "Tracking No" in line:
+            tracking = line.split(":")[1].strip()
+
+    # 🖥️ Send to HTML
+    return render_template("confirm.html",
+        sender_name=sender_name,
+        sender_phone=sender_phone,
+        sender_address=sender_address,
+        receiver_name=receiver_name,
+        receiver_phone=receiver_phone,
+        receiver_address=receiver_address,
+        weight=weight,
+        parcel_type=parcel_type,
+        spl_instruction=spl_instruction,
+        datetime="Now",
+        tracking=tracking
+    )
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
