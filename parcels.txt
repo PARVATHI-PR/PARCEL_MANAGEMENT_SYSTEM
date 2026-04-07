@@ -1,2 +1,0 @@
-tracking_number,sender_name,sender_contact,sender_address,receiver_name,receiver_contact,receiver_address,weight_kg,parcel_type,special_instructions,created_at
-TRK-20260326-0002-74PZ,sample,1234567890,"123,fngjn",mangai,1230998765,"bngjngjrngjrngjr",100.00,box,"None",TRK-20260326-0002-74PZ
