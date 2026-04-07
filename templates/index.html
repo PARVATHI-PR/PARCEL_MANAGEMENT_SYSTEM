@@ -6,6 +6,7 @@
   <title>Parcel Dispatch System</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
   <style>
+<<<<<<< HEAD
     body {
       background-color: #f4f6f8;
       font-family: Arial, sans-serif;
@@ -104,13 +105,46 @@
       margin-top: 40px;
       border-top: 1px solid #dee2e6;
     }
+=======
+    body { background-color: #f4f6f8; font-family: Arial, sans-serif; }
+    .navbar { background-color: #1a3c5e; }
+    .navbar-brand { color: #ffffff; font-size: 20px; font-weight: bold; }
+    .navbar-user { color: #cfd8e3; font-size: 14px; }
+    .hero { background-color: #1a3c5e; color: white; padding: 40px 20px; text-align: center; }
+    .hero h1 { font-size: 28px; font-weight: bold; }
+    .hero h5 { font-size: 18px; font-weight: bold; }
+    .hero p { font-size: 15px; color: #cfd8e3; }
+    .card { border: 1px solid #dce3ec; border-radius: 10px; background-color: #ffffff; text-align: center; padding: 30px 20px; height: 100%; }
+    .card-icon { font-size: 40px; margin-bottom: 15px; }
+    .card h5 { font-size: 17px; font-weight: bold; color: #1a3c5e; margin-bottom: 10px; }
+    .card p { font-size: 13px; color: #6c757d; margin-bottom: 20px; }
+    .btn-module { background-color: #1a3c5e; color: white; border: none; border-radius: 6px; padding: 8px 20px; font-size: 14px; text-decoration: none; display: inline-block; }
+    .btn-module:hover { background-color: #14304d; color: white; }
+    .info-box { background-color: #e8f0fe; border-left: 4px solid #1a3c5e; border-radius: 6px; padding: 14px 18px; font-size: 13px; color: #2c3e50; margin-top: 30px; }
+    footer { text-align: center; padding: 18px; font-size: 12px; color: #adb5bd; margin-top: 40px; border-top: 1px solid #dee2e6; }
+>>>>>>> SPM-9-&-10-implementation
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
+<<<<<<< HEAD
   <nav class="navbar px-4">
     <span class="navbar-brand">📦 Parcel Dispatch System</span>
+=======
+  <nav class="navbar px-4 d-flex justify-content-between align-items-center">
+    <span class="navbar-brand">&#128230; Parcel Dispatch System</span>
+    <div class="d-flex align-items-center gap-3">
+      <span class="navbar-user">&#128100; {{ user_name }}
+        {% if role == 'admin' %}
+          <span class="badge bg-warning text-dark ms-1">Admin</span>
+        {% else %}
+          <span class="badge bg-success ms-1">Customer</span>
+        {% endif %}
+      </span>
+      <a href="{{ url_for('logout') }}" class="btn btn-sm btn-outline-light">Logout</a>
+    </div>
+>>>>>>> SPM-9-&-10-implementation
   </nav>
 
   <!-- Hero -->
@@ -122,6 +156,7 @@
 
   <!-- Cards -->
   <div class="container mt-5">
+<<<<<<< HEAD
     <div class="row g-4">
 
       <!-- Register Parcel -->
@@ -153,15 +188,80 @@
           <a href="update.html" class="btn-module">Update Details</a>
         </div>
       </div>
+=======
+    <div class="row g-4 justify-content-center">
+
+      {% if role == 'admin' %}
+
+        <!-- Register Parcel -->
+        <div class="col-md-4 col-sm-12">
+          <div class="card">
+            <div class="card-icon">&#128221;</div>
+            <h5>Register Parcel</h5>
+            <p>Add a new parcel with sender and receiver details. A unique tracking number will be generated automatically.</p>
+            <a href="{{ url_for('register') }}" class="btn-module">Register Parcel</a>
+          </div>
+        </div>
+
+        <!-- Search Parcel -->
+        <div class="col-md-4 col-sm-12">
+          <div class="card">
+            <div class="card-icon">&#128269;</div>
+            <h5>Search Parcel</h5>
+            <p>Search for a parcel using its tracking number, or filter deliveries by location and date.</p>
+            <a href="{{ url_for('search') }}" class="btn-module">Search Parcel</a>
+          </div>
+        </div>
+
+        <!-- Update Status -->
+        <div class="col-md-4 col-sm-12">
+          <div class="card">
+            <div class="card-icon">&#9999;&#65039;</div>
+            <h5>Update Status</h5>
+            <p>Update delivery status, contact information, or location records using the parcel tracking number.</p>
+            <a href="{{ url_for('update_status') }}" class="btn-module">Update Status</a>
+          </div>
+        </div>
+
+      {% else %}
+
+        <!-- Search Parcel -->
+        <div class="col-md-5 col-sm-12">
+          <div class="card">
+            <div class="card-icon">&#128269;</div>
+            <h5>Search Parcel</h5>
+            <p>Search for a parcel using its tracking number, or filter deliveries by location and date.</p>
+            <a href="{{ url_for('search') }}" class="btn-module">Search Parcel</a>
+          </div>
+        </div>
+
+        <!-- My Parcels -->
+        <div class="col-md-5 col-sm-12">
+          <div class="card">
+            <div class="card-icon">&#128236;</div>
+            <h5>My Parcels</h5>
+            <p>View all parcels you have sent or received, along with their latest delivery status and notifications.</p>
+            <a href="{{ url_for('my_parcels') }}" class="btn-module">My Parcels</a>
+          </div>
+        </div>
+
+      {% endif %}
+>>>>>>> SPM-9-&-10-implementation
 
     </div>
 
     <!-- Info Box -->
     <div class="info-box">
+<<<<<<< HEAD
       ℹ️ &nbsp; Sender and receiver are notified automatically once the parcel reaches the destination office.
     </div>
   </div>
     
+=======
+      &#8505;&#65039; &nbsp; Sender and receiver are notified automatically once the parcel reaches the destination office.
+    </div>
+  </div>
+>>>>>>> SPM-9-&-10-implementation
 
   <!-- Footer -->
   <footer>
@@ -169,4 +269,8 @@
   </footer>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> SPM-9-&-10-implementation

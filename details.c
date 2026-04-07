@@ -41,6 +41,9 @@ void input_person(Person *p, const char *role) {
             printf("  -> Address cannot be empty. Please re-enter.\n");
     } while (!is_non_empty(p->address));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> SPM-9-&-10-implementation
 
     do {                                                          
         printf("City    : ");                                     
@@ -49,6 +52,7 @@ void input_person(Person *p, const char *role) {
             printf("  -> City cannot be empty. Please re-enter.\n"); 
      } while (!is_non_empty(p->city));
 
+<<<<<<< HEAD
 =======
     do {                                                          
         printf("City    : ");                                     
@@ -57,6 +61,8 @@ void input_person(Person *p, const char *role) {
             printf("  -> City cannot be empty. Please re-enter.\n"); 
     } while (!is_non_empty(p->city));
 >>>>>>> SPM-8
+=======
+>>>>>>> SPM-9-&-10-implementation
     do {
         printf("Phone   : ");
         scanf(" %[^\n]", p->phone);

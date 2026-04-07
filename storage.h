@@ -12,10 +12,14 @@ typedef struct {
     char sender_address[200];
     char sender_city[50];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> SPM-9-&-10-implementation
     char receiver_name[100];
     char receiver_contact[20];
     char receiver_address[200];
     char receiver_city[50];
+<<<<<<< HEAD
 =======
 
     char receiver_name[100];
@@ -24,6 +28,8 @@ typedef struct {
     char receiver_city[50]; 
     
 >>>>>>> SPM-8
+=======
+>>>>>>> SPM-9-&-10-implementation
     float weight;
     char parcel_type[50];
     char special_instructions[200]; // can be entered by user
