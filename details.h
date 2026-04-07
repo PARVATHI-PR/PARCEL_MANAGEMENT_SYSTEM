@@ -1,9 +1,12 @@
 // details.h
-
 typedef struct {
     char name[50];
     char address[100];
+<<<<<<< HEAD
     char city[50];
+=======
+    char city[50]; 
+>>>>>>> SPM-8
     char phone[15];
 } Person;
 

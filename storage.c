@@ -46,16 +46,28 @@ void write_csv_row(FILE *f, const Parcel *p, const char *date, const char *time_
     }
 
     fprintf(f,
+<<<<<<< HEAD
         "\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%.2f,\"%s\",\"%s\",\"%s\",\"%s\"\n",
+=======
+        "%s,%s,%s,%s,%s,%s,%s,%s,%s,%.2f,%s,%s,%s,%s\n",
+>>>>>>> SPM-8
         p->tracking_number,
         p->sender_name,
         p->sender_contact,
         p->sender_address,
+<<<<<<< HEAD
         p->sender_city,         
         p->receiver_name,
         p->receiver_contact,
         p->receiver_address,
         p->receiver_city,       
+=======
+        p->sender_city, 
+        p->receiver_name,
+        p->receiver_contact,
+        p->receiver_address,
+        p->receiver_city,
+>>>>>>> SPM-8
         p->weight,
         p->parcel_type,
         special,

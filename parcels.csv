@@ -1,2 +1,7 @@
 tracking_number,sender_name,sender_contact,sender_address,sender_city,receiver_name,receiver_contact,receiver_address,receiver_city,weight_kg,parcel_type,special_instructions,date,time
+<<<<<<< HEAD
 "TRK-20260407-0003-F7JO","test_city_3","1234567890","sender_address","madurai","receiver_1","1234098877","123,abc lane","chennai",1.00,"box","handle with care","2026-04-07","10:29:58"
+=======
+"TRK-20260406-0002-8TN1","test1","1234567890","123,abc lane","madurai","receiver","1515151515","no.2 rajaji st., chennai","chennai",1.00,"bo","fragile","2026-04-06","22:33:02"
+"TRK-20260406-0003-OPO6","sender","8546848493","sender_address","madurai","receiver","1234567891","raddress","chennai",1.00,"box","handle with care","2026-04-06","22:56:48"
+>>>>>>> SPM-8

@@ -15,13 +15,21 @@ def book():
     sender_name = request.form['senderName']
     sender_phone = request.form['senderPhone']
     sender_address = request.form['senderAddress']
+<<<<<<< HEAD
     sender_city =request.form['senderCity']
+=======
+    sender_city=request.form['senderCity']
+>>>>>>> SPM-8
 #receiver details
     receiver_name = request.form['receiverName']
     receiver_phone = request.form['receiverPhone']
     receiver_address = request.form['receiverAddress']
+<<<<<<< HEAD
     receiver_city =request.form['receiverCity']
 
+=======
+    receiver_city=request.form['receiverCity']
+>>>>>>> SPM-8
 
 #parcel details 
     weight = request.form['weight']
@@ -65,6 +73,12 @@ def book():
     )
 @app.route('/search')
 def search():
+<<<<<<< HEAD
     pass     
+=======
+   pass
+
+
+>>>>>>> SPM-8
 if __name__ == "__main__":
     app.run(debug=True)
