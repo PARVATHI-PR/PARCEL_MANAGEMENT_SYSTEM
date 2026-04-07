@@ -41,6 +41,13 @@ void input_person(Person *p, const char *role) {
             printf("  -> Address cannot be empty. Please re-enter.\n");
     } while (!is_non_empty(p->address));
 
+    do {                                                          
+        printf("City    : ");                                     
+        scanf(" %[^\n]", p->city);                               
+        if (!is_non_empty(p->city))                             
+            printf("  -> City cannot be empty. Please re-enter.\n"); 
+     } while (!is_non_empty(p->city));
+
     do {
         printf("Phone   : ");
         scanf(" %[^\n]", p->phone);
@@ -58,7 +65,7 @@ void input_parcel_info(ParcelInfo *pi) {
         if (pi->weight <= 0)
             printf("  -> Weight must be positive. Please re-enter.\n");
     } while (pi->weight <= 0);
-
+     
     do {
         printf("Type (docs/box/etc.) : ");
         scanf(" %[^\n]", pi->type);
