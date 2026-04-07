@@ -29,7 +29,7 @@
       font-weight: bold;
     }
     .hero p {
-      font-size: 15px;
+      font-size: 16px;
       color: #cfd8e3;
     }
 
@@ -38,42 +38,74 @@
       border: 1px solid #dce3ec;
       border-radius: 10px;
       background-color: #ffffff;
-      padding: 20px 25px;
-      margin-bottom: 18px;
+      padding: 28px 30px;
+      margin-bottom: 20px;
     }
-    .result-card .tracking-badge {
+
+    .tracking-badge {
       display: inline-block;
       background-color: #1a3c5e;
       color: #ffffff;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: bold;
       border-radius: 6px;
-      padding: 4px 12px;
-      margin-bottom: 14px;
+      padding: 6px 16px;
+      margin-bottom: 20px;
       letter-spacing: 0.5px;
     }
-    .result-card .section-label {
+
+    .section-label {
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #8da5be;
+      margin-bottom: 8px;
+      letter-spacing: 0.8px;
+    }
+
+    .section-value {
+      font-size: 15px;
+      color: #2c3e50;
+      line-height: 1.8;
+    }
+
+    .section-value strong {
+      font-size: 16px;
+      color: #1a3c5e;
+    }
+
+    .divider {
+      border-top: 1px dashed #dce3ec;
+      margin: 18px 0;
+    }
+
+    .meta-row {
+      font-size: 14px;
+      color: #4a5568;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-item .meta-label {
       font-size: 11px;
       font-weight: bold;
       text-transform: uppercase;
       color: #8da5be;
-      margin-bottom: 4px;
       letter-spacing: 0.6px;
+      margin-bottom: 2px;
     }
-    .result-card .section-value {
-      font-size: 13px;
+
+    .meta-item .meta-val {
+      font-size: 14px;
       color: #2c3e50;
-    }
-    .result-card .divider {
-      border-top: 1px dashed #dce3ec;
-      margin: 14px 0;
-    }
-    .result-card .meta-row {
-      font-size: 12px;
-      color: #6c757d;
-    }
-    .result-card .meta-row span {
-      margin-right: 18px;
+      font-weight: 500;
     }
 
     /* no results */
@@ -81,31 +113,28 @@
       border: 1px solid #dce3ec;
       border-radius: 10px;
       background-color: #ffffff;
-      padding: 40px 20px;
+      padding: 50px 20px;
       text-align: center;
       color: #6c757d;
-      font-size: 14px;
-    }
-    .no-results-box .icon {
-      font-size: 36px;
-      margin-bottom: 12px;
+      font-size: 15px;
     }
 
     .summary-bar {
       background-color: #e8f0fe;
       border-left: 4px solid #1a3c5e;
       border-radius: 6px;
-      padding: 12px 18px;
-      font-size: 13px;
+      padding: 14px 20px;
+      font-size: 15px;
       color: #2c3e50;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
+
     .btn-back {
       background-color: transparent;
       color: #1a3c5e;
       border: 1px solid #1a3c5e;
       border-radius: 6px;
-      padding: 8px 20px;
+      padding: 9px 22px;
       font-size: 14px;
       text-decoration: none;
       display: inline-block;
@@ -114,10 +143,11 @@
       background-color: #1a3c5e;
       color: white;
     }
+
     footer {
       text-align: center;
       padding: 18px;
-      font-size: 12px;
+      font-size: 13px;
       color: #adb5bd;
       margin-top: 40px;
       border-top: 1px solid #dee2e6;
@@ -128,13 +158,13 @@
 
   <!-- Navbar -->
   <nav class="navbar px-4">
-    <span class="navbar-brand">📦 Parcel Dispatch System</span>
+    <span class="navbar-brand">Parcel Dispatch System</span>
   </nav>
 
   <!-- Hero -->
   <div class="hero">
     <h1>Search Results</h1>
-    <p>{{ search_type }} &nbsp;→&nbsp; <strong>{{ search_query }}</strong></p>
+    <p>{{ search_type }} &nbsp;&rarr;&nbsp; <strong>{{ search_query }}</strong></p>
   </div>
 
   <div class="container mt-4">
@@ -142,9 +172,9 @@
     <!-- Summary bar -->
     <div class="summary-bar">
       {% if results %}
-        ✅ &nbsp; Found <strong>{{ results | length }}</strong> parcel(s) matching your search.
+        Found <strong>{{ results | length }}</strong> parcel(s) matching your search.
       {% else %}
-        🔍 &nbsp; No parcels found for <strong>{{ search_query }}</strong>.
+        No parcels found for <strong>{{ search_query }}</strong>.
       {% endif %}
     </div>
 
@@ -153,7 +183,7 @@
       {% for r in results %}
       <div class="result-card">
 
-        <div class="tracking-badge">📦 {{ r.tracking }}</div>
+        <div class="tracking-badge">Tracking No: {{ r.tracking }}</div>
 
         <div class="row">
           <!-- Sender -->
@@ -161,8 +191,8 @@
             <div class="section-label">Sender</div>
             <div class="section-value">
               <strong>{{ r.sender_name }}</strong><br/>
-              📞 {{ r.sender_contact }}<br/>
-              📍 {{ r.sender_address }}, {{ r.sender_city }}
+              Phone: {{ r.sender_contact }}<br/>
+              Address: {{ r.sender_address }}, {{ r.sender_city }}
             </div>
           </div>
           <!-- Receiver -->
@@ -170,8 +200,8 @@
             <div class="section-label">Receiver</div>
             <div class="section-value">
               <strong>{{ r.receiver_name }}</strong><br/>
-              📞 {{ r.receiver_contact }}<br/>
-              📍 {{ r.receiver_address }}, {{ r.receiver_city }}
+              Phone: {{ r.receiver_contact }}<br/>
+              Address: {{ r.receiver_address }}, {{ r.receiver_city }}
             </div>
           </div>
         </div>
@@ -179,11 +209,27 @@
         <div class="divider"></div>
 
         <div class="meta-row">
-          <span>⚖️ {{ r.weight }}</span>
-          <span>📦 {{ r.parcel_type }}</span>
-          <span>📅 {{ r.date }} &nbsp; 🕐 {{ r.time }}</span>
+          <div class="meta-item">
+            <span class="meta-label">Weight</span>
+            <span class="meta-val">{{ r.weight }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Parcel Type</span>
+            <span class="meta-val">{{ r.parcel_type }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Date</span>
+            <span class="meta-val">{{ r.date }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Time</span>
+            <span class="meta-val">{{ r.time }}</span>
+          </div>
           {% if r.instructions %}
-          <span>📝 {{ r.instructions }}</span>
+          <div class="meta-item">
+            <span class="meta-label">Instructions</span>
+            <span class="meta-val">{{ r.instructions }}</span>
+          </div>
           {% endif %}
         </div>
 
@@ -192,16 +238,15 @@
 
     {% else %}
       <div class="no-results-box">
-        <div class="icon">🔍</div>
         <p>No parcels found. Try a different search term or date range.</p>
       </div>
     {% endif %}
 
     <!-- Back button -->
     <div class="mt-3 mb-2">
-      <a href="{{ url_for('search') }}" class="btn-back">← New Search</a>
+      <a href="{{ url_for('search') }}" class="btn-back">New Search</a>
       &nbsp;
-      <a href="{{ url_for('home') }}" class="btn-back">🏠 Home</a>
+      <a href="{{ url_for('index') }}" class="btn-back">Home</a>
     </div>
 
   </div>
@@ -213,3 +258,4 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

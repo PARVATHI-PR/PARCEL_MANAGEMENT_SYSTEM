@@ -119,7 +119,7 @@ def login_required(role=None):
 # ─── Auth Routes ──────────────────────────────────────────────
 
 @app.route("/")
-def home():
+def index():
     if not login_required():
         return redirect(url_for("login"))
     return render_template("index.html",
@@ -137,7 +137,7 @@ def login():
             session["user"]  = ADMIN_ID
             session["name"]  = ADMIN_NAME
             session["role"]  = "admin"
-            return redirect(url_for("home"))
+            return redirect(url_for("index"))
 
         # User check
         users = load_users()
@@ -145,7 +145,7 @@ def login():
             session["user"]  = username
             session["name"]  = users[username]["name"]
             session["role"]  = "user"
-            return redirect(url_for("home"))
+            return redirect(url_for("index"))
 
         return render_template("login.html", error="Invalid ID or password.")
 
@@ -234,11 +234,90 @@ def book():
 
 # ─── Search ───────────────────────────────────────────────────
 
-@app.route("/search")
+def parse_search_output(output):
+    results = []
+    current = {}
+    for line in output.splitlines():
+        line = line.strip()
+        if line == "RESULT_START":
+            current = {}
+        elif line == "RESULT_END":
+            if current:
+                results.append(current)
+        elif line.startswith("Tracking No:"):
+            current["tracking"] = line.split(":",1)[1].strip()
+        elif line.startswith("Sender:"):
+            parts = line.split(":",1)[1].strip().split(" | ")
+            current["sender_name"]    = parts[0] if len(parts) > 0 else ""
+            current["sender_contact"] = parts[1] if len(parts) > 1 else ""
+            current["sender_address"] = parts[2] if len(parts) > 2 else ""
+            current["sender_city"]    = parts[3] if len(parts) > 3 else ""
+        elif line.startswith("Receiver:"):
+            parts = line.split(":",1)[1].strip().split(" | ")
+            current["receiver_name"]    = parts[0] if len(parts) > 0 else ""
+            current["receiver_contact"] = parts[1] if len(parts) > 1 else ""
+            current["receiver_address"] = parts[2] if len(parts) > 2 else ""
+            current["receiver_city"]    = parts[3] if len(parts) > 3 else ""
+        elif line.startswith("Weight:"):
+            current["weight"] = line.split(":",1)[1].strip()
+        elif line.startswith("Type:"):
+            current["parcel_type"] = line.split(":",1)[1].strip()
+        elif line.startswith("Instructions:"):
+            current["instructions"] = line.split(":",1)[1].strip()
+        elif line.startswith("Date:"):
+            current["date"] = line.split(":",1)[1].strip()
+        elif line.startswith("Time:"):
+            current["time"] = line.split(":",1)[1].strip()
+    return results
+
+@app.route('/search')
 def search():
-    if not login_required():
-        return redirect(url_for("login"))
-    return render_template("search.html")
+    return render_template('search.html')
+
+@app.route('/search/tracking', methods=['POST'])
+def search_by_tracking():
+    tracking_number = request.form.get('tracking_number', '').strip()
+    result = subprocess.run(
+        ["search.exe", "tracking", tracking_number],
+        capture_output=True, text=True
+    )
+    results = parse_search_output(result.stdout)
+    return render_template('search_results.html',
+        results=results,
+        search_type="Tracking Number",
+        search_query=tracking_number
+    )
+
+@app.route('/search/location', methods=['POST'])
+def search_by_location():
+    origin      = request.form.get('origin', '').strip()
+    destination = request.form.get('destination', '').strip()
+    city = destination if destination else origin
+    result = subprocess.run(
+        ["search.exe", "location", city],
+        capture_output=True, text=True
+    )
+    results = parse_search_output(result.stdout)
+    return render_template('search_results.html',
+        results=results,
+        search_type="Location",
+        search_query=f"City: {city}"
+    )
+
+@app.route('/search/date', methods=['POST'])
+def search_by_date():
+    from_date = request.form.get('from_date', '').strip()
+    to_date   = request.form.get('to_date', '').strip()
+    result = subprocess.run(
+        ["search.exe", "date", from_date, to_date],
+        capture_output=True, text=True
+    )
+    results = parse_search_output(result.stdout)
+    return render_template('search_results.html',
+        results=results,
+        search_type="Date Range",
+        search_query=f"{from_date} to {to_date}"
+    )
 
 # ─── Update Status (Admin only) ───────────────────────────────
 
