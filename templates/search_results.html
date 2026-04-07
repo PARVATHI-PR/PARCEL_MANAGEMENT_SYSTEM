@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Results - Parcel Dispatch System</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <style>
+    body {
+      background-color: #f4f6f8;
+      font-family: Arial, sans-serif;
+    }
+    .navbar {
+      background-color: #1a3c5e;
+    }
+    .navbar-brand {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .hero {
+      background-color: #1a3c5e;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .hero p {
+      font-size: 15px;
+      color: #cfd8e3;
+    }
+
+    /* result card */
+    .result-card {
+      border: 1px solid #dce3ec;
+      border-radius: 10px;
+      background-color: #ffffff;
+      padding: 20px 25px;
+      margin-bottom: 18px;
+    }
+    .result-card .tracking-badge {
+      display: inline-block;
+      background-color: #1a3c5e;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 6px;
+      padding: 4px 12px;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+    .result-card .section-label {
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #8da5be;
+      margin-bottom: 4px;
+      letter-spacing: 0.6px;
+    }
+    .result-card .section-value {
+      font-size: 13px;
+      color: #2c3e50;
+    }
+    .result-card .divider {
+      border-top: 1px dashed #dce3ec;
+      margin: 14px 0;
+    }
+    .result-card .meta-row {
+      font-size: 12px;
+      color: #6c757d;
+    }
+    .result-card .meta-row span {
+      margin-right: 18px;
+    }
+
+    /* no results */
+    .no-results-box {
+      border: 1px solid #dce3ec;
+      border-radius: 10px;
+      background-color: #ffffff;
+      padding: 40px 20px;
+      text-align: center;
+      color: #6c757d;
+      font-size: 14px;
+    }
+    .no-results-box .icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .summary-bar {
+      background-color: #e8f0fe;
+      border-left: 4px solid #1a3c5e;
+      border-radius: 6px;
+      padding: 12px 18px;
+      font-size: 13px;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    .btn-back {
+      background-color: transparent;
+      color: #1a3c5e;
+      border: 1px solid #1a3c5e;
+      border-radius: 6px;
+      padding: 8px 20px;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-back:hover {
+      background-color: #1a3c5e;
+      color: white;
+    }
+    footer {
+      text-align: center;
+      padding: 18px;
+      font-size: 12px;
+      color: #adb5bd;
+      margin-top: 40px;
+      border-top: 1px solid #dee2e6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar px-4">
+    <span class="navbar-brand">📦 Parcel Dispatch System</span>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Search Results</h1>
+    <p>{{ search_type }} &nbsp;→&nbsp; <strong>{{ search_query }}</strong></p>
+  </div>
+
+  <div class="container mt-4">
+
+    <!-- Summary bar -->
+    <div class="summary-bar">
+      {% if results %}
+        ✅ &nbsp; Found <strong>{{ results | length }}</strong> parcel(s) matching your search.
+      {% else %}
+        🔍 &nbsp; No parcels found for <strong>{{ search_query }}</strong>.
+      {% endif %}
+    </div>
+
+    <!-- Results -->
+    {% if results %}
+      {% for r in results %}
+      <div class="result-card">
+
+        <div class="tracking-badge">📦 {{ r.tracking }}</div>
+
+        <div class="row">
+          <!-- Sender -->
+          <div class="col-md-6 mb-3">
+            <div class="section-label">Sender</div>
+            <div class="section-value">
+              <strong>{{ r.sender_name }}</strong><br/>
+              📞 {{ r.sender_contact }}<br/>
+              📍 {{ r.sender_address }}, {{ r.sender_city }}
+            </div>
+          </div>
+          <!-- Receiver -->
+          <div class="col-md-6 mb-3">
+            <div class="section-label">Receiver</div>
+            <div class="section-value">
+              <strong>{{ r.receiver_name }}</strong><br/>
+              📞 {{ r.receiver_contact }}<br/>
+              📍 {{ r.receiver_address }}, {{ r.receiver_city }}
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="meta-row">
+          <span>⚖️ {{ r.weight }}</span>
+          <span>📦 {{ r.parcel_type }}</span>
+          <span>📅 {{ r.date }} &nbsp; 🕐 {{ r.time }}</span>
+          {% if r.instructions %}
+          <span>📝 {{ r.instructions }}</span>
+          {% endif %}
+        </div>
+
+      </div>
+      {% endfor %}
+
+    {% else %}
+      <div class="no-results-box">
+        <div class="icon">🔍</div>
+        <p>No parcels found. Try a different search term or date range.</p>
+      </div>
+    {% endif %}
+
+    <!-- Back button -->
+    <div class="mt-3 mb-2">
+      <a href="{{ url_for('search') }}" class="btn-back">← New Search</a>
+      &nbsp;
+      <a href="{{ url_for('home') }}" class="btn-back">🏠 Home</a>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2024 Parcel Dispatch System. All rights reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
