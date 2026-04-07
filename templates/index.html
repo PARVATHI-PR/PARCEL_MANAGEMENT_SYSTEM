@@ -28,8 +28,13 @@
       text-align: center;
     }
 
-    .hero h1 {
+    .hero h1{
       font-size: 28px;
+      font-weight: bold;
+    }
+
+    .hero h5{
+      font-size: 18px;
       font-weight: bold;
     }
 
@@ -110,7 +115,8 @@
 
   <!-- Hero -->
   <div class="hero">
-    <h1>Welcome to the Dispatch Management Portal</h1>
+    <h1>Welcome to LCU</h1>
+    <h5><i>Logistics Control Unit</i></h5>
     <p>Register parcels, track deliveries, and update records — all in one place.</p>
   </div>
 
@@ -134,7 +140,7 @@
           <div class="card-icon">🔍</div>
           <h5>Search Parcel</h5>
           <p>Search for a parcel using its tracking number, or filter deliveries by location and date.</p>
-          <a href="search.html" class="btn-module">Search Parcel</a>
+          <a href="{{ url_for('search') }}" class="btn-module">Search Parcel</a>
         </div>
       </div>
 

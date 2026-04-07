@@ -1,26 +1,3 @@
-tracking_number,sender_name,sender_contact,sender_address,receiver_name,receiver_contact,receiver_address,weight_kg,parcel_type,special_instructions,created_at,
-TRK-20260327-0001-JVFK,sample,1234567890,"123,abc lane , Madurai",recive,1234567890,njgnjngjrn,10,box,None,TRK-20260327-0001-JVFK,
-TRK-20260327-0002-TF46,SAMPLE1,1234567890,NGJNGJN,SAMPLE2RECIEVER,987654321,NGRJGNJRNGJRNGJR,10,DOC,None,TRK-20260327-0002-TF46,
-TRK-20260327-0003-AIDN,PARVATHI,1234567811,NFJNGRJNFJ,MANGAI,1234567891,NGJRNGJRNGRJNGJRNJRNJR,1,BOX,None,27-03-2026,
-TRK-20260327-0005-TPN3,parvathi ,1234567891,jrnjrgjr,mangai,2345678901,fgrhbjhgrjgh,10,box,None,27-03-2026,
-TRK-20260327-0006-ZXL7,parvathi,1234567891,nrjngjrgnjr,mangai,2345678901,gnjggjirutir,1,box,None,27-03-2026,01:29:34
-TRK-20260327-0007-AYAF,parvathi,1234567891,bnrjgnrjgnrjgnrj,mangai,1234567892,1234567892,1,box,None,27-03-2026,01:35:29
-"TRK-20260327-0008-98IB","parvathi","1224567892","1234567891","mangai","1234567892","brgjrjgjrng",10.00,"box","None","2026-03-27","01:45:34"
-"TRK-20260327-0009-FK4M","parvathi","1234567891","1234567891","mangai","1230987654","hgrjhgrhgjhg",1.00,"box","spl","2026-03-27","01:52:45"
-"TRK-20260327-0011-KZSD","parvathi","1234567891","bnfjrbngjrbng","mangai","2345678910","fhurhgurhgirjgirj",1.00,"box","snjrngf","2026-03-27","09:55:10"
-"TRK-20260327-0012-AI0F","kim taehyung","7397533361","seoul","jungkook","9976123507","korea",30.00,"box","care","2026-03-27","09:56:45"
-"TRK-20260401-0001-4PK2","test_with index","1234567891","sender_address","receiver","1234098877","123,abc lane",1.20,"fragile","handle with care","2026-04-01","21:31:00"
-"TRK-20260401-0002-7IDO","test_with index","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","21:37:15"
-"TRK-20260401-0003-RQDQ","test_with index","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","21:53:08"
-"TRK-20260401-0004-PU08","test_with index","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","22:03:57"
-"TRK-20260401-0005-K533","test_with index_1","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","22:08:30"
-"TRK-20260401-0006-X4X0","check_date_time","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","22:16:49"
-"TRK-20260401-0007-KOV6","test_with _date","1234567891","sender_address","receiver","1234098877","123,abc lane",4.00,"fragile","handle with care","2026-04-01","22:24:49"
-"TRK-20260401-0008-NWZ0","test_with index_1","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","22:32:32"
-"TRK-20260401-0009-BR49","check_date_time","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","22:38:31"
-"TRK-20260401-0010-D6AR","test_with index_1","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","22:39:48"
-"TRK-20260401-0011-E82K","check_date_time","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","23:00:22"
-"TRK-20260401-0012-2ZJM","check_date_time","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","23:06:43"
-"TRK-20260401-0013-X1FW","check_date_time","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","handle with care","2026-04-01","23:09:04"
-"TRK-20260401-0014-NXU3","check_date_time_final","1234567891","sender_address","receiver","1234098877","123,abc lane",2.50,"fragile","handle with care","2026-04-01","23:10:50"
-"TRK-20260401-0015-WRKS","check_with_home","1234567891","sender_address","receiver","1234098877","123,abc lane",1.00,"fragile","123","2026-04-01","23:51:06"
+tracking_number,sender_name,sender_contact,sender_address,sender_city,receiver_name,receiver_contact,receiver_address,receiver_city,weight_kg,parcel_type,special_instructions,date,time
+"TRK-20260406-0002-8TN1","test1","1234567890","123,abc lane","madurai","receiver","1515151515","no.2 rajaji st., chennai","chennai",1.00,"bo","fragile","2026-04-06","22:33:02"
+"TRK-20260406-0003-OPO6","sender","8546848493","sender_address","madurai","receiver","1234567891","raddress","chennai",1.00,"box","handle with care","2026-04-06","22:56:48"

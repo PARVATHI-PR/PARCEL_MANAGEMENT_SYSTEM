@@ -40,7 +40,12 @@ void input_person(Person *p, const char *role) {
         if (!is_non_empty(p->address))
             printf("  -> Address cannot be empty. Please re-enter.\n");
     } while (!is_non_empty(p->address));
-
+    do {                                                          
+        printf("City    : ");                                     
+        scanf(" %[^\n]", p->city);                              
+        if (!is_non_empty(p->city))                              
+            printf("  -> City cannot be empty. Please re-enter.\n"); 
+    } while (!is_non_empty(p->city));
     do {
         printf("Phone   : ");
         scanf(" %[^\n]", p->phone);

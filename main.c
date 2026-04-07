@@ -28,12 +28,12 @@ int main() {
     strncpy(p.sender_name, sender.name, sizeof(p.sender_name)-1);
     strncpy(p.sender_contact, sender.phone, sizeof(p.sender_contact)-1);
     strncpy(p.sender_address, sender.address, sizeof(p.sender_address)-1);
-
+    strncpy(p.sender_city, sender.city, sizeof(p.sender_city)-1); 
     // Fill receiver details
     strncpy(p.receiver_name, receiver.name, sizeof(p.receiver_name)-1);
     strncpy(p.receiver_contact, receiver.phone, sizeof(p.receiver_contact)-1);
     strncpy(p.receiver_address, receiver.address, sizeof(p.receiver_address)-1);
-
+    strncpy(p.receiver_city, receiver.city, sizeof(p.receiver_city)-1);
     // Parcel details
     p.weight = parcel.weight;
     strncpy(p.parcel_type, parcel.type, sizeof(p.parcel_type)-1);

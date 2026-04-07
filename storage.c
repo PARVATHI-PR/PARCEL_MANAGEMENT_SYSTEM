@@ -26,8 +26,8 @@ void get_current_datetime(char *date, char *time_str) {
 // Write CSV header
 void write_csv_header(FILE *f) {
     fprintf(f,
-        "tracking_number,sender_name,sender_contact,sender_address,"
-        "receiver_name,receiver_contact,receiver_address,"
+        "tracking_number,sender_name,sender_contact,sender_address,sender_city,"
+        "receiver_name,receiver_contact,receiver_address,receiver_city,"
         "weight_kg,parcel_type,special_instructions,date,time\n");
 }
 
@@ -46,14 +46,16 @@ void write_csv_row(FILE *f, const Parcel *p, const char *date, const char *time_
     }
 
     fprintf(f,
-        "\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%.2f,\"%s\",\"%s\",\"%s\",\"%s\"\n",
+        "%s,%s,%s,%s,%s,%s,%s,%s,%s,%.2f,%s,%s,%s,%s\n",
         p->tracking_number,
         p->sender_name,
         p->sender_contact,
         p->sender_address,
+        p->sender_city, 
         p->receiver_name,
         p->receiver_contact,
         p->receiver_address,
+        p->receiver_city,
         p->weight,
         p->parcel_type,
         special,
